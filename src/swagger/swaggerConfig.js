@@ -1,5 +1,6 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const path = require('path');
 
 // Swagger configuration
 const swaggerOptions = {
@@ -14,7 +15,7 @@ const swaggerOptions = {
             { url: 'http://localhost:3002/api' },
         ],
     },
-    apis: ['./routes/*.js'], // Path to API documentation
+    apis: [path.join(__dirname, "../routes/*.js")],  // Path to API documentation
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
