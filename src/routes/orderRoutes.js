@@ -15,8 +15,9 @@ const orderController = require('../controllers/orderController');
  *         name: orderId
  *         required: true
  *         schema:
- *           type: integer
- *         description: The ID of the order to delete
+ *           type: string
+ *           format: uuid
+ *         description: The UUID of the order to delete
  *     responses:
  *       200:
  *         description: Order deleted successfully
