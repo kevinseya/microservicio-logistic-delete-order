@@ -5,21 +5,24 @@ const { v4: uuidv4, validate: validateUUID } = require('uuid');
 exports.deleteOrder = async (req, res) => {
     try {
         const { orderId } = req.params;
-        
-        // Validate that orderId is a valid UUID
+
         if (!validateUUID(orderId)) {
             return res.status(400).json({ error: 'Invalid UUID format' });
         }
 
-        // Attempt to delete order
-        const deletedOrder = await Order.destroy({ where: { orderId } });
-        if (deletedOrder === 0) {
-            return res.status(404).json({ message: 'Order not found' });
+        // Buscar la orden y actualizar el estado active a false
+        const updatedOrder = await Order.update(
+            { active: false }, 
+            { where: { orderId } }
+        );
+
+        if (updatedOrder[0] === 0) {
+            return res.status(404).json({ error: 'Order not found' });
         }
-        res.status(200).json({ message: 'Order deleted successfully' });
+
+        return res.status(200).json({ message: 'Order marked as inactive' });
     } catch (error) {
-        console.error('Error deleting order:', error);
-        res.status(500).json({ message: 'Failed to delete order' });
+        return res.status(500).json({ error: 'Error deleting order' });
     }
 };
 
