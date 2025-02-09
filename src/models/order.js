@@ -27,6 +27,10 @@ const Order = sequelize.define('Order', {
         type: DataTypes.STRING,
         defaultValue: 'Pending',
     },
+    active: {  
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    }
 });
 
 sequelize.sync({ force: false }) // Sync model with database
