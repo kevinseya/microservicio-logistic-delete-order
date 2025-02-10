@@ -12,7 +12,7 @@ const swaggerOptions = {
             description: 'API for managing logistics orders',
         },
         servers: [
-            { url: 'http://localhost:3002/api' },
+            { url: 'http://localhost:7003/api' },
         ],
     },
     apis: [path.join(__dirname, "../routes/*.js")],  // Path to API documentation

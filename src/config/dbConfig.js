@@ -1,9 +1,10 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-// Database connection setup
-const sequelize = new Sequelize('logistics_db', 'root', '1234', {
-    host: 'localhost',
-    dialect: 'mysql',
+// Database connection setup using environment variables
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mariadb',
 });
 
 sequelize.authenticate()
