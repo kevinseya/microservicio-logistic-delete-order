@@ -1,41 +1,53 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/dbConfig');
 
-// Order model definition
 const Order = sequelize.define('Order', {
     orderId: {
         type: DataTypes.UUID, 
         defaultValue: DataTypes.UUIDV4, 
         primaryKey: true, 
     },
+    idCustomer: { 
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
     senderName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     receiverName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
+    },
+    receiverPhone: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     packageDetails: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT
     },
     shippingAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
+    },
+    deliveryAddress: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    price: {
+        type: DataTypes.FLOAT
     },
     status: {
         type: DataTypes.STRING,
-        defaultValue: 'Pending',
+        defaultValue: 'Pending'
     },
-    active: {  
+    active:  {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     }
+}, {
+    tableName: 'orders',  
+    timestamps: true      
 });
 
-sequelize.sync({ force: false }) // Sync model with database
-    .then(() => console.log('Order table created successfully'))
-    .catch(err => console.error('Error creating table:', err));
-
 module.exports = Order;
-
