@@ -10,7 +10,7 @@ exports.deleteOrder = async (req, res) => {
             return res.status(400).json({ error: 'Invalid UUID format' });
         }
 
-        // Buscar la orden y actualizar el estado active a false
+        // Find the order and update the active status to false
         const updatedOrder = await Order.update(
             { active: false }, 
             { where: { orderId } }
